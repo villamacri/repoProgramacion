@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http//www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+	<form method="POST" th:action="addEmpleado" th:object="${empleadoForm}">
+		<table>
+			<tr>
+				<td><label form="nombre">Nombre</label></td>
+				<td><input type="text" th:field="*{nombre}"/></td>
+			</tr>
+			
+			<tr>
+				<td><label form="email">Email</label></td>
+				<td><input type="text" th:field="*{email}"/></td>
+			</tr>
+</body>
+</html>

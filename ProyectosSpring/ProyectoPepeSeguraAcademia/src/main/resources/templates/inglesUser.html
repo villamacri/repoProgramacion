@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+	<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lista de Cursos</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/cursos.css}">
+
+</head>
+
+<body>
+	<nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+
+	<br>
+	<hr>
+
+	
+
+	<div class="row">
+		<div class="col-md-4" th:each="curso : ${listaCurso}">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${curso.nombre}"></h5>
+					<p class="card-text" th:text="'Nivel de Dificultad: ' + ${curso.nivelDificultad}"></p>
+					<p class="card-text" th:text="'Duración: ' + ${curso.duracion} + ' horas'"></p>
+					<p class="card-text" th:text="'Precio: $' + ${curso.precio}"></p>
+					<p class="card-text">
+					<ul>
+						<li th:each="certificado : ${curso.certificado}" th:text="${certificado.nombreC}"></li>
+					</ul>
+					</p>
+					<p class="card-text">
+					<ul>
+						<li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
+					</ul>
+					</p>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
