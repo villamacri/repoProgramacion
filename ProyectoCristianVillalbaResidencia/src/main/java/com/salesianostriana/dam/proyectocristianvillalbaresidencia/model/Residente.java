@@ -3,6 +3,7 @@ package com.salesianostriana.dam.proyectocristianvillalbaresidencia.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 public class Residente {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	private String nombre, apellido;
@@ -26,6 +27,6 @@ public class Residente {
 	private String nombreFamiliar;
 	
 	@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name="fk_residente_curso"))
+	@JoinColumn(foreignKey = @ForeignKey(name="fk_residente_plan"))
 	private Plan plan;
 }

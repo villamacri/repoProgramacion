@@ -9,7 +9,7 @@ import com.salesianostriana.dam.proyectocristianvillalbaresidencia.model.Residen
 
 public interface ResidenteRepositorio extends JpaRepository<Residente, Long> {
 
-    @Query("SELECT r FROM Residente")
+    @Query("SELECT r FROM Residente r ORDER BY r.plan.tipo ASC")
     List<Residente> listarOrdenadosPorPlan();
 }
 
