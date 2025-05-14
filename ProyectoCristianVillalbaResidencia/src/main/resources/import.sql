@@ -7,4 +7,4 @@ INSERT INTO plan ( tipo, precio, servicios) VALUES ('VIP', 500.0, 'Suite privada
 
 INSERT INTO residente ( nombre, apellido, edad, dni, nombre_familiar, plan_id) VALUES ('Lucía', 'Gómez', 75, '12345678A', 'Carlos Gómez', 1);
 INSERT INTO residente ( nombre, apellido, edad, dni, nombre_familiar, plan_id) VALUES ('Miguel', 'Ramírez', 80, '23456789B', 'Ana Ramírez', 2);
-INSERT INTO residente ( nombre, apellido, edad, dni, nombre_familiar, plan_id) VALUES ('Elena', 'Martín', 68, '34567890C', 'Luis Martín', 3);
+INSERT INTO residente ( nombre, apellido, edad, dni, nombre_familiar, plan_id) VALUES ('Elena', 'Martín', 71, '34567890C', 'Luis Martín', 3);

@@ -5,7 +5,7 @@
 
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient position-sticky top-0">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/admin/panel}">SerenaVida Admin</a>
+        <a class="navbar-brand" th:href="@{/}">SerenaVida Admin</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,24 +14,15 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/residentes}">Residentes</a>
+                    <a class="nav-link" th:href="@{/residentes}">Residentes</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/servicios}">Servicios</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/planes}">Planes y Suscripciones</a>
+                    <a class="nav-link" th:href="@{/planes}">Planes y Suscripciones</a>
                 </li>
 
             </ul>
 
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Cerrar sesión</a>
-                </li>
-            </ul>
         </div>
     </div>
 </nav>

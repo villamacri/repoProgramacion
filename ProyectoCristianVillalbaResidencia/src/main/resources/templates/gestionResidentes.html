@@ -60,6 +60,8 @@
 		    <thead class="table-light">
 		      <tr>
 		        <th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Edad</th>
 		        <th>Plan</th>
 		        <th>Acciones</th>
 		      </tr>
@@ -68,6 +70,8 @@
 		      <!-- Mostrar todos los residentes -->
 		      <tr th:each="r : ${residentes}">
 		        <td th:text="${r.nombre}">Nombre</td>
+				<td th:text="${r.apellido}">Apellidos</td>
+				<td th:text="${r.edad}">Edad</td>
 		        <td th:text="${r.plan.tipo}">Plan</td>
 		        <td>
 		          <div class="d-flex gap-2">
@@ -81,5 +85,6 @@
 		    </tbody>
 		</table>
 	</div>
+	<footer th:replace="~{/fragmentos/pie::footer}"></footer>
 </body>
 </html>
