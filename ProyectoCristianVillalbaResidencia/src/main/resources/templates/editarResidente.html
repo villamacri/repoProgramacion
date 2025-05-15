@@ -25,8 +25,11 @@
                     <input type="text" th:field="*{apellido}" class="form-control" required>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Edad (mínimo 70)</label>
-                    <input type="number" th:field="*{edad}" class="form-control" min="70" required>
+                    <label class="form-label">Fecha de nacimiento</label>
+                    <input type="date" th:field="*{fechaNacimiento}" class="form-control" required>
+					<div th:if="${errorEdad}" class="alert alert-danger">
+					      <p th:text="${errorEdad}"></p>
+					  </div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">DNI</label>
@@ -48,6 +51,9 @@
                 <div class="col-12 d-flex justify-content-between mt-4">
                     <a th:href="@{/residentes}" class="btn btn-secondary px-4">Cancelar</a>
                     <button type="submit" class="btn btn-primary px-4">Guardar cambios</button>
+					<div th:if="${errorDni}" class="alert alert-danger">
+					    <p th:text="${errorDni}"></p>
+					</div>
                 </div>
             </form>
         </div>

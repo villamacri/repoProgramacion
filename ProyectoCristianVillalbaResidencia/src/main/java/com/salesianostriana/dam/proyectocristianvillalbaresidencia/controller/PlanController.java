@@ -19,7 +19,7 @@ public class PlanController {
 	@Autowired
 	private PlanServicio planServicio;
 	
-	@GetMapping("/gestionPlanes")
+	@GetMapping("/planes")
 	public String listarPlanes(Model model) {
 		model.addAttribute("listaPlanes", planServicio.listarTodos());
 		model.addAttribute("plan", new Plan());
@@ -28,7 +28,7 @@ public class PlanController {
 	}
 	
 	@PostMapping("/guardar")
-	public String guardarPlan(@ModelAttribute("plan") Plan plan) {
+	public String guardarPlan(@ModelAttribute Plan plan) {
 		planServicio.guardar(plan);
 		
 		return "redirect:/planes";
@@ -50,6 +50,6 @@ public class PlanController {
 	@PostMapping("/eliminar/{id}")
 	public String eliminarPlan(@PathVariable Long id) {
 		planServicio.eliminarPorId(id);
-		return "redirect:/residentes";
+		return "redirect:/planes";
 	}
 }

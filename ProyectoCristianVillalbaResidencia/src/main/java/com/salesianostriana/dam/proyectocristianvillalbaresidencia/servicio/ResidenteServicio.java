@@ -30,4 +30,8 @@ public class ResidenteServicio {
 	public void eliminar(Long id) {
 		residenteRepositorio.deleteById(id);
 	}
+	
+	public Optional<Residente> buscarPorDni(String dni){
+		return residenteRepositorio.findByDni(dni);
+	}
 }

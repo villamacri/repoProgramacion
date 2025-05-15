@@ -1,5 +1,9 @@
 package com.salesianostriana.dam.proyectocristianvillalbaresidencia.model;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +26,10 @@ public class Residente {
 	private long id;
 	
 	private String nombre, apellido;
-	private int edad;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaNacimiento;
+	
 	private String dni;
 	private String nombreFamiliar;
 	
