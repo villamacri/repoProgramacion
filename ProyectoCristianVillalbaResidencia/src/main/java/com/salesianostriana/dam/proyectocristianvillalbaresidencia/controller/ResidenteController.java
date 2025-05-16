@@ -28,9 +28,9 @@ public class ResidenteController {
 	
 	@GetMapping("/residentes")
 	public String index(Model model) {
-		model.addAttribute("residentes", residenteServicio.listarTodos());
+		model.addAttribute("residentes", residenteServicio.findAll());
 		model.addAttribute("residente", new Residente());
-		model.addAttribute("planes", planServicio.listarTodos());
+		model.addAttribute("planes", planServicio.findAll());
 		
 		return "gestionResidentes";
 	}
@@ -43,14 +43,14 @@ public class ResidenteController {
 		
 		if(existente.isPresent()) {
 			model.addAttribute("errorDni", "Ya existe un residente con ese DNI.");
-			model.addAttribute("residentes", residenteServicio.listarTodos());
-			model.addAttribute("planes", planServicio.listarTodos());
+			model.addAttribute("residentes", residenteServicio.findAll());
+			model.addAttribute("planes", planServicio.findAll());
 			return "gestionResidentes";
 		
 		}
 		
 		if(residente.getPlan() != null && residente.getPlan().getId() != null) {
-			Plan plan = planServicio.buscarPorId(residente.getPlan().getId()).orElse(null);
+			Plan plan = planServicio.findById(residente.getPlan().getId()).orElse(null);
 			residente.setPlan(plan);
 		}
 		
@@ -59,14 +59,14 @@ public class ResidenteController {
 			int edad = Period.between(residente.getFechaNacimiento(), LocalDate.now()).getYears();
 			if(edad < 65) {
 				model.addAttribute("errorEdad", "La edad mínima es de 65 años");
-				model.addAttribute("residentes", residenteServicio.listarTodos());
-				model.addAttribute("planes", planServicio.listarTodos());
+				model.addAttribute("residentes", residenteServicio.findAll());
+				model.addAttribute("planes", planServicio.findAll());
 				return "gestionResidentes";
 			}
 		}
 		
 		
-		residenteServicio.guardar(residente);
+		residenteServicio.save(residente);
 		return "redirect:/residentes";
 	}
 	
@@ -74,15 +74,15 @@ public class ResidenteController {
 	public String eliminar(@PathVariable Long id) {
 		
 		
-	    residenteServicio.eliminar(id);
+	    residenteServicio.deleteById(id);
 	    return "redirect:/residentes";
 	}
 	
 	@GetMapping("/residentes/editar/{id}")
 	public String editar(@PathVariable Long id, Model model) {
-		Residente residente = residenteServicio.buscarPorId(id).orElseThrow(()-> new IllegalArgumentException("ID inválido: " + id));
+		Residente residente = residenteServicio.findById(id).orElseThrow(()-> new IllegalArgumentException("ID inválido: " + id));
 		model.addAttribute("residente", residente);
-		model.addAttribute("planes", planServicio.listarTodos());
+		model.addAttribute("planes", planServicio.findAll());
 		
 		return "editarResidente";
 		
@@ -95,21 +95,21 @@ public class ResidenteController {
 		
 		if(existente.isPresent()) {
 			model.addAttribute("errorDni", "Ya existe un residente con ese DNI.");
-			model.addAttribute("residentes", residenteServicio.listarTodos());
-			model.addAttribute("planes", planServicio.listarTodos());
+			model.addAttribute("residentes", residenteServicio.findAll());
+			model.addAttribute("planes", planServicio.findAll());
 			return "editarResidente";
 		
 		}
 		
 		if(residente.getPlan() != null && residente.getPlan().getId() != null) {
-			Plan plan = planServicio.buscarPorId(residente.getPlan().getId()).orElse(null);
+			Plan plan = planServicio.findById(residente.getPlan().getId()).orElse(null);
 			residente.setPlan(plan);
 		}
 		
-	    Plan plan = planServicio.buscarPorId(planId).orElse(null);
+	    Plan plan = planServicio.findById(planId).orElse(null);
 	    residente.setPlan(plan);
 
-	    residenteServicio.guardar(residente);
+	    residenteServicio.save(residente);
 
 	    return "redirect:/residentes";
 	}

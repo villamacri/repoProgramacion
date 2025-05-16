@@ -21,22 +21,22 @@ public class PlanController {
 	
 	@GetMapping("/planes")
 	public String listarPlanes(Model model) {
-		model.addAttribute("listaPlanes", planServicio.listarTodos());
+		model.addAttribute("listaPlanes", planServicio.findAll());
 		model.addAttribute("plan", new Plan());
 		
 		return "gestionPlanes";
 	}
 	
-	@PostMapping("/guardar")
+	@PostMapping("/planes/guardar")
 	public String guardarPlan(@ModelAttribute Plan plan) {
-		planServicio.guardar(plan);
+		planServicio.save(plan);
 		
 		return "redirect:/planes";
 	}
 	
-	@GetMapping("/editar/{id}")
+	@GetMapping("/planes/editar/{id}")
 	public String editarPlan(@PathVariable Long id, Model model) {
-		Optional<Plan> planOpt = planServicio.buscarPorId(id);
+		Optional<Plan> planOpt = planServicio.findById(id);
 		
 		if(planOpt.isPresent()) {
 			/*model.addAttribute("plan", planOpt.get());
@@ -47,9 +47,9 @@ public class PlanController {
 		}
 	}
 	
-	@PostMapping("/eliminar/{id}")
+	@PostMapping("/planes/eliminar/{id}")
 	public String eliminarPlan(@PathVariable Long id) {
-		planServicio.eliminarPorId(id);
+		planServicio.delete(planServicio.findById(id).get());
 		return "redirect:/planes";
 	}
 }

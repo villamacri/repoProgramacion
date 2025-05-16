@@ -15,11 +15,15 @@
     <h2 class="mb-4 text-center">Gestión de Planes y Suscripciones</h2>
 
     <!-- Formulario para agregar o editar plan -->
+	<h4>Formulario para agregar nuevo plan</h4>
     <form th:action="@{/planes/guardar}" method="post" th:object="${plan}" class="row g-3 mb-5">
         <input type="hidden" th:field="*{id}">
         <div class="col-md-5">
             <input type="text" th:field="*{tipo}" class="form-control" placeholder="Tipo de plan" required>
         </div>
+		<div class="col-md-5">
+		    <input type="number" th:field="*{precio}" class="form-control" placeholder="Precio(€)" required>
+		</div>
         <div class="col-md-5">
             <input type="text" th:field="*{servicios}" class="form-control" placeholder="Servicios" required>
         </div>
