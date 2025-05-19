@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.proyectocristianvillalbaresidencia.model.Residente;
@@ -19,8 +18,7 @@ public class ResidenteServicio extends ServicioBaseImpl<Residente, Long, Residen
     @Autowired
     private ResidenteRepositorio residenteRepositorio;
     
-    @Value("${residencia.suplemento.mayores85}")
-    private double suplementoMayores85;
+    private double suplementoMayores85=0.20;
 
     public Optional<Residente> buscarPorDni(String dni) {
         return residenteRepositorio.findByDni(dni);
@@ -54,10 +52,14 @@ public class ResidenteServicio extends ServicioBaseImpl<Residente, Long, Residen
     }
     
     public double calcularSuplementoMayores85() {
-    	return contarResidentesMayores85() * suplementoMayores85 * 12;
+    	return  this.findAll()
+    			.stream()
+    			.filter(r -> Period.between(r.getFechaNacimiento(), LocalDate.now()).getYears() > 85)
+                .mapToDouble(r -> r.getPlan().getPrecio() * 12 * suplementoMayores85)
+                .sum();
     }
     
-    public double calcularRecaudacionAnualConSuplmento() {
+    public double calcularRecaudacionAnualConSuplemento() {
     	return calcularRecaudacionAnual() + calcularSuplementoMayores85();
     }
     
