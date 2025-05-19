@@ -44,6 +44,7 @@
             </tr>
         </thead>
         <tbody>
+			<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
             <tr th:each="p : ${listaPlanes}">
                 <td th:text="${p.id}"></td>
                 <td th:text="${p.tipo}"></td>

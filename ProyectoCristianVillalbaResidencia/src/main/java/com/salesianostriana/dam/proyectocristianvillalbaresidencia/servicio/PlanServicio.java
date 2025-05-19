@@ -8,5 +8,5 @@ import com.salesianostriana.dam.proyectocristianvillalbaresidencia.servicio.base
 
 @Service
 public class PlanServicio extends ServicioBaseImpl<Plan, Long, PlanRepositorio>{
-
+	
 }

@@ -64,15 +64,26 @@
 	  	</div>
 	  	<!-- Tabla de residentes -->
 		  <table class="table table-bordered">
-		    <thead class="table-light">
-		      <tr>
-		        <th>Nombre</th>
-				<th>Apellidos</th>
-				<th>Fecha de Nacimiento</th>
-		        <th>Plan</th>
-		        <th>Acciones</th>
-		      </tr>
-		    </thead>
+			<thead class="table-light">
+			  <tr>
+			    <th>
+			      <a th:href="@{/residentes(campo='nombre', direccion='asc')}">Nombre ↑</a> |
+			      <a th:href="@{/residentes(campo='nombre', direccion='desc')}">↓</a>
+			    </th>
+			    <th>
+			      <a th:href="@{/residentes(campo='apellido', direccion='asc')}">Apellidos ↑</a> |
+			      <a th:href="@{/residentes(campo='apellido', direccion='desc')}">↓</a>
+			    </th>
+			    <th>
+			      <a th:href="@{/residentes(campo='fechaNacimiento', direccion='asc')}">Nacimiento ↑</a> |
+			      <a th:href="@{/residentes(campo='fechaNacimiento', direccion='desc')}">↓</a>
+			    </th>
+			    <th>
+			      Plan 
+			    </th>
+			    <th>Acciones</th>
+			  </tr>
+			</thead>
 		    <tbody>
 		      <!-- Mostrar todos los residentes -->
 		      <tr th:each="r : ${residentes}">

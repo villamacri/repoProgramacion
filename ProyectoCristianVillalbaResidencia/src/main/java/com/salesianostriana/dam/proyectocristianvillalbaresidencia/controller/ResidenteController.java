@@ -27,13 +27,23 @@ public class ResidenteController {
 	public PlanServicio planServicio;
 	
 	@GetMapping("/residentes")
-	public String index(Model model) {
-		model.addAttribute("residentes", residenteServicio.findAll());
-		model.addAttribute("residente", new Residente());
-		model.addAttribute("planes", planServicio.findAll());
-		
-		return "gestionResidentes";
+	public String index(
+	        @RequestParam(value = "campo", required = false) String campo,
+	        @RequestParam(value = "direccion", required = false) String direccion,
+	        Model model) {
+
+	    if (campo != null && direccion != null) {
+	        model.addAttribute("residentes", residenteServicio.listarOrdenadosPor(campo, direccion));
+	    } else {
+	        model.addAttribute("residentes", residenteServicio.findAll());
+	    }
+
+	    model.addAttribute("residente", new Residente());
+	    model.addAttribute("planes", planServicio.findAll());
+
+	    return "gestionResidentes";
 	}
+
 	
 	@PostMapping("/residentes/agregar")
 	public String guardar(@ModelAttribute Residente residente, Model model) {
@@ -113,7 +123,5 @@ public class ResidenteController {
 
 	    return "redirect:/residentes";
 	}
-
-
-
+	
 }

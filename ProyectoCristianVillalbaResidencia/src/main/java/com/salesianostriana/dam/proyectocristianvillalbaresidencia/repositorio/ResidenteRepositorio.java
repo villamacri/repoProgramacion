@@ -14,6 +14,23 @@ public interface ResidenteRepositorio extends JpaRepository<Residente, Long> {
     List<Residente> listarOrdenadosPorPlan();
     
     Optional<Residente> findByDni(String dni);
+    
+    @Query("SELECT r FROM Residente r ORDER BY r.nombre ASC")
+    List<Residente> ordenarPorNombreAsc();
+
+    @Query("SELECT r FROM Residente r ORDER BY r.nombre DESC")
+    List<Residente> ordenarPorNombreDesc();
+
+    @Query("SELECT r FROM Residente r ORDER BY r.apellido ASC")
+    List<Residente> ordenarPorApellidoAsc();
+
+    @Query("SELECT r FROM Residente r ORDER BY r.apellido DESC")
+    List<Residente> ordenarPorApellidoDesc();
+    
+    @Query("SELECT r FROM Residente r ORDER BY r.fechaNacimiento ASC")
+    List<Residente> ordenarPorFechaNacimientoAsc();
+
+    @Query("SELECT r FROM Residente r ORDER BY r.fechaNacimiento DESC")
+    List<Residente> ordenarPorFechaNacimientoDesc();
+    
 }
-
-

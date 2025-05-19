@@ -36,4 +36,18 @@ public class Residente {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_residente_plan"))
 	private Plan plan;
+	
+	/*
+     * MÉTODOS HELPER PARA LA ASOCIACIÓN CON PLAN
+     */
+    
+    public void addToPlan(Plan plan) {
+        this.plan = plan;
+        plan.getResidentes().add(this);
+    }
+    
+    public void removeFromPlan(Plan plan) {
+        plan.getResidentes().remove(this);
+        this.plan = null;        
+    }
 }
