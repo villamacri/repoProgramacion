@@ -19,7 +19,7 @@
 
                 <div class="col-md-6">
                     <label class="form-label">Tipo</label>
-                    <input type="text" th:field="*{tipo}" class="form-control" required>
+                    <input type="text" th:field="*{tipo}" class="form-control" maxlength="65" required>
                 </div>
 
                 <div class="col-md-6">
@@ -29,7 +29,7 @@
 
                 <div class="col-12">
                     <label class="form-label">Servicios incluidos</label>
-                    <textarea th:field="*{servicios}" class="form-control" rows="4" required></textarea>
+                    <textarea th:field="*{servicios}" class="form-control" rows="4" maxlength="250" required></textarea>
                 </div>
 
                 <div class="col-12 d-flex justify-content-between mt-4">

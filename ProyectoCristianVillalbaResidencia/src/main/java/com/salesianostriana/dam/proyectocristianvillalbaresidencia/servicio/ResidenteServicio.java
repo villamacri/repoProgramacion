@@ -36,6 +36,14 @@ public class ResidenteServicio extends ServicioBaseImpl<Residente, Long, Residen
         };
     }
     
+    public List<Residente> mayoresDe85() {
+        return this.findAll()
+                   .stream()
+                   .filter(r -> Period.between(r.getFechaNacimiento(), LocalDate.now()).getYears() > 85)
+                   .toList();
+    }
+
+    
     public double calcularRecaudacionAnual() {
     	return this.findAll()
     			.stream()

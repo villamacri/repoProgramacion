@@ -14,15 +14,47 @@
     <div class="container py-5">
         <h1 class="mb-4">Informes Generales</h1>
 
+        <div class="alert alert-primary">
+            Total de residentes: <strong th:text="${totalResidentes}"></strong>
+        </div>
+
         <ul class="list-group mb-4">
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Recaudación anual total:
                 <strong th:text="${recaudacionAnual + ' €'}"></strong>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li class="list-group-item d-flex justify-content-between align-items-center" id="accordionMayores85">
                 Residentes mayores de 85 años:
                 <strong th:text="${mayores85}"></strong>
             </li>
+			<div class="accordion mb-4" id="accordionMayores85">
+			    <div class="accordion-item" th:each="r, stat : ${mayores85List}">
+			        <h2 class="accordion-header" th:id="'headingMayor' + ${stat.index}">
+			            <button class="accordion-button collapsed" type="button"
+			                    data-bs-toggle="collapse"
+			                    th:attr="data-bs-target='#collapseMayor' + ${stat.index}, aria-expanded='false', aria-controls='collapseMayor' + ${stat.index}">
+			                <span th:text="${r.nombre + ' ' + r.apellido}">Nombre Apellido</span>
+			            </button>
+			        </h2>
+
+			        <div class="accordion-collapse collapse"
+			             th:id="'collapseMayor' + ${stat.index}"
+			             th:attr="aria-labelledby='headingMayor' + ${stat.index}"
+			             data-bs-parent="#accordionMayores85">
+
+			            <div class="accordion-body">
+			                <p><strong>Fecha de nacimiento:</strong> <span th:text="${r.fechaNacimiento}"></span></p>
+			                <p><strong>DNI:</strong> <span th:text="${r.dni}"></span></p>
+			                <p><strong>Familiar:</strong> <span th:text="${r.nombreFamiliar}"></span></p>
+			                <p><strong>Plan:</strong> <span th:text="${r.plan.tipo}"></span></p>
+			                <p><strong>Precio mensual base:</strong> <span th:text="${r.plan.precio + ' €'}"></span></p>
+			                <p><strong>Precio mensual con suplemento (+20%):</strong> 
+			                   <span th:text="${#numbers.formatDecimal(r.plan.precio * 1.2, 1, 2)} + ' €'"></span>
+			                </p>
+			            </div>
+			        </div>
+			    </div>
+			</div>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Suplemento total por mayores de 85 años:
                 <strong th:text="${suplemento85 + ' €'}"></strong>
@@ -32,6 +64,33 @@
                 <strong th:text="${recaudacionConSuplemento + ' €'}"></strong>
             </li>
         </ul>
+		<h2>Lista Residentes</h2>
+        <!-- Accordion con la información de los residentes -->
+        <div class="accordion mb-4" id="accordionResidentes">
+            <div class="accordion-item" th:each="r, stat : ${residentes}">
+				<h2 class="accordion-header">
+				    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+				            th:id="'heading' + ${stat.index}"
+				            th:attr="aria-expanded=${false}"
+				            th:data-bs-target="'#collapse' + ${stat.index}"
+				            th:attrappend="aria-controls='collapse' + ${stat.index}">
+				        <span th:text="${r.nombre + ' ' + r.apellido}">Nombre Apellido</span>
+				    </button>
+				</h2>
+				<div class="accordion-collapse collapse"
+				     th:id="'collapse' + ${stat.index}"
+				     th:attr="aria-labelledby='heading' + ${stat.index}"
+				     data-bs-parent="#accordionResidentes">
+				    <div class="accordion-body">
+				        <p><strong>Fecha de nacimiento:</strong> <span th:text="${r.fechaNacimiento}"></span></p>
+				        <p><strong>DNI:</strong> <span th:text="${r.dni}"></span></p>
+				        <p><strong>Familiar:</strong> <span th:text="${r.nombreFamiliar}"></span></p>
+				        <p><strong>Plan:</strong> <span th:text="${r.plan.tipo}"></span> - 
+				            <strong>Precio mensual:</strong> <span th:text="${r.plan.precio + ' €'}"></span></p>
+				    </div>
+				</div>
+            </div>
+        </div>
 
         <a th:href="@{/residentes}" class="btn btn-secondary">Volver</a>
     </div>

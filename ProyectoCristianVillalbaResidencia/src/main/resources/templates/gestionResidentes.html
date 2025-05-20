@@ -18,12 +18,12 @@
 		    
 		    <div class="col-md-6">
 		      <label class="form-label">Nombre</label>
-		      <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre" required>
+		      <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre" maxlength="65">
 		    </div>
 		    
 		    <div class="col-md-6">
 		      <label class="form-label">Apellido</label>
-		      <input type="text" th:field="*{apellido}" class="form-control" placeholder="Apellido" required>
+		      <input type="text" th:field="*{apellido}" class="form-control" placeholder="Apellido" maxlength="120" required>
 		    </div>
 		
 		    <div class="col-md-4">
@@ -36,13 +36,13 @@
 		    
 		    <div class="col-md-4">
 		      <label class="form-label">DNI</label>
-		      <input type="text" th:field="*{dni}" class="form-control" placeholder="DNI" required>
+		      <input type="text" th:field="*{dni}" class="form-control" placeholder="DNI/NIE" pattern="^([0-9]{8}[A-Za-z]|[XYZ][0-9]{7}[A-Za-z])$" title="Debe ser un DNI (8 números + letra) o NIE (empieza por X, Y o Z seguido de 7 números y una letra)" required>
 			  <div class="text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
 		  	</div>
 		
 		    <div class="col-md-4">
 		      <label class="form-label">Nombre del Familiar</label>
-		      <input type="text" th:field="*{nombreFamiliar}" class="form-control" placeholder="Nombre de Familiar" required>
+		      <input type="text" th:field="*{nombreFamiliar}" class="form-control" placeholder="Nombre de Familiar" maxlength="120">
 		    </div>
 	
 		    <div class="col-md-6">
