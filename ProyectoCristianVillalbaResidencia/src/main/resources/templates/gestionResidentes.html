@@ -25,6 +25,11 @@
 		      <label class="form-label">Apellido</label>
 		      <input type="text" th:field="*{apellido}" class="form-control" placeholder="Apellido" maxlength="120" required>
 		    </div>
+			
+			<div class="col-md-6">
+				<label class="form-label">URL foto perfil</label>
+				<input type="text" th:field="*{urlFoto}" class="form-control" placeholder="URL foto" required>
+			</div>
 		
 		    <div class="col-md-4">
 		      <label class="form-label">Fecha de nacimiento</label>
@@ -65,45 +70,49 @@
 		<div class="col-md-12 my-4">
 		  <a th:href="@{/informes}" class="btn btn-secondary">Ver Informes</a>
 		</div>
-	  	<!-- Tabla de residentes -->
-		  <table class="table table-bordered">
-			<thead class="table-light">
-			  <tr>
-			    <th>
-			      <a th:href="@{/residentes(campo='nombre', direccion='asc')}">Nombre ↑</a> |
-			      <a th:href="@{/residentes(campo='nombre', direccion='desc')}">↓</a>
-			    </th>
-			    <th>
-			      <a th:href="@{/residentes(campo='apellido', direccion='asc')}">Apellidos ↑</a> |
-			      <a th:href="@{/residentes(campo='apellido', direccion='desc')}">↓</a>
-			    </th>
-			    <th>
-			      <a th:href="@{/residentes(campo='fechaNacimiento', direccion='asc')}">Nacimiento ↑</a> |
-			      <a th:href="@{/residentes(campo='fechaNacimiento', direccion='desc')}">↓</a>
-			    </th>
-			    <th>
-			      Plan 
-			    </th>
-			    <th>Acciones</th>
-			  </tr>
-			</thead>
-		    <tbody>
-		      <!-- Mostrar todos los residentes -->
-		      <tr th:each="r : ${residentes}">
-		        <td th:text="${r.nombre}">Nombre</td>
-				<td th:text="${r.apellido}">Apellidos</td>
-				<td th:text="${r.fechaNacimiento}">Fecha de Nacimiento</td>
-		        <td th:text="${r.plan.tipo}">Plan</td>
-		        <td>
-		          <div class="d-flex gap-2">
-		            <a th:href="@{'/residentes/editar/' + ${r.id}}" class="btn btn-sm btn-warning">Editar</a>
-		            <form th:action="@{'/residentes/eliminar/' + ${r.id}}" method="post">
-		              <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-		            </form>
-		          </div>
-		        </td>
-		      </tr>
-		    </tbody>
+		
+		<!-- Tabla de residentes -->
+		<table class="table table-bordered text-center align-middle">
+		  <thead class="table-light">
+		    <tr>
+		      <th style="width: 140px;">Foto Residente</th>
+		      <th>
+		        <a th:href="@{/residentes(campo='nombre', direccion='asc')}">Nombre ↑</a> |
+		        <a th:href="@{/residentes(campo='nombre', direccion='desc')}">↓</a>
+		      </th>
+		      <th>
+		        <a th:href="@{/residentes(campo='apellido', direccion='asc')}">Apellidos ↑</a> |
+		        <a th:href="@{/residentes(campo='apellido', direccion='desc')}">↓</a>
+		      </th>
+		      <th>
+		        <a th:href="@{/residentes(campo='fechaNacimiento', direccion='asc')}">Nacimiento ↑</a> |
+		        <a th:href="@{/residentes(campo='fechaNacimiento', direccion='desc')}">↓</a>
+		      </th>
+		      <th>Plan</th>
+		      <th>Acciones</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <!-- Mostrar todos los residentes -->
+		    <tr th:each="r : ${residentes}">
+		      <td>
+		        <img th:src="${r.urlFoto}" th:alt="${r.nombre}" class="d-block mx-auto"
+		             style="max-width: 100%; max-height: 60px; object-fit: contain;">
+		      </td>
+		      <td th:text="${r.nombre}">Nombre</td>
+		      <td th:text="${r.apellido}">Apellidos</td>
+		      <td th:text="${r.fechaNacimiento}">Fecha de Nacimiento</td>
+		      <td th:text="${r.plan.tipo}">Plan</td>
+		      <td>
+		        <div class="d-flex gap-2 justify-content-center">
+		          <a th:href="@{'/residentes/editar/' + ${r.id}}" class="btn btn-sm btn-warning">Editar</a>
+		          <form th:action="@{'/residentes/eliminar/' + ${r.id}}" method="post">
+		            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+		          </form>
+		        </div>
+		      </td>
+		    </tr>
+		  </tbody>
 		</table>
 	</div>
 	<footer th:replace="~{/fragmentos/pie::footer}"></footer>

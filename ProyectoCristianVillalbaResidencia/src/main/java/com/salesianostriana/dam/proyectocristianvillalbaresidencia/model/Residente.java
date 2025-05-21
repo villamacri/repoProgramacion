@@ -25,7 +25,7 @@ public class Residente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String nombre, apellido;
+	private String nombre, apellido, urlFoto;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;

@@ -28,8 +28,8 @@ public class ResidenteController {
 	
 	@GetMapping("/residentes")
 	public String index(
-	        @RequestParam(value = "campo", required = false) String campo,
-	        @RequestParam(value = "direccion", required = false) String direccion,
+	        @RequestParam( required = false) String campo,
+	        @RequestParam( required = false) String direccion,
 	        Model model) {
 
 	    if (campo != null && direccion != null) {
@@ -100,16 +100,6 @@ public class ResidenteController {
 	
 	@PostMapping("/residentes/editar/guardar")
 	public String guardar(@ModelAttribute Residente residente, @RequestParam("plan") Long planId, Model model ) {
-		
-		Optional<Residente> existente = residenteServicio.buscarPorDni(residente.getDni());
-		
-		if(existente.isPresent()) {
-			model.addAttribute("errorDni", "Ya existe un residente con ese DNI.");
-			model.addAttribute("residentes", residenteServicio.findAll());
-			model.addAttribute("planes", planServicio.findAll());
-			return "editarResidente";
-		
-		}
 		
 		if(residente.getPlan() != null && residente.getPlan().getId() != null) {
 			Plan plan = planServicio.findById(residente.getPlan().getId()).orElse(null);

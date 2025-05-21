@@ -24,6 +24,10 @@
                     <label class="form-label">Apellido</label>
                     <input type="text" th:field="*{apellido}" class="form-control" maxlength="120" required>
                 </div>
+				<div class="col-md-6">
+					<label class="form-label">URL foto perfil</label>
+					<input type="text" th:field="*{urlFoto}" class="form-control" placeholder="URL foto" required>
+				</div>
                 <div class="col-md-4">
                     <label class="form-label">Fecha de nacimiento</label>
                     <input type="date" th:field="*{fechaNacimiento}" class="form-control" required>
